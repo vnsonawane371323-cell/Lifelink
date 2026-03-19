@@ -1,0 +1,37 @@
+{
+  "name": "lifelink-backend",
+  "version": "1.0.0",
+  "description": "LifeLink — Intelligent Emergency Blood Response Network API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "kill-port 5000 && nodemon server.js"
+  },
+  "keywords": [
+    "lifelink",
+    "blood-donation",
+    "emergency",
+    "medical",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^8.0.1",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "kill-port": "^2.0.1"
+  }
+}
