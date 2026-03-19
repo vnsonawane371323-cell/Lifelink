@@ -13,7 +13,7 @@ const navItems = [
   { to: '/org/settings', label: 'Settings', icon: FiBell },
 ];
 
-const socketUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+const socketUrl = 'https://lifelink-0ysg.onrender.com';
 
 export default function OrganizationLayout() {
   const navigate = useNavigate();
