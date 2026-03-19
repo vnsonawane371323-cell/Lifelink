@@ -9,7 +9,6 @@ export default function BloodRequests() {
   const { selectedCity } = useCity();
   const [requests, setRequests] = useState([]);
   const [loadingList, setLoadingList] = useState(false);
-  const [creating, setCreating] = useState(false);
   const [error, setError] = useState('');
 
   const fetchRequests = async () => {
@@ -31,26 +30,6 @@ export default function BloodRequests() {
     fetchRequests();
   }, [selectedCity]);
 
-  const createRequest = async (payload) => {
-    try {
-      setCreating(true);
-      setError('');
-      const response = await api.post('/api/request/create', payload);
-      // Optimistically prepend the new request so the list updates instantly
-      const newRequest = response?.data?.request;
-      if (newRequest) {
-        setRequests((prev) => [newRequest, ...prev]);
-      }
-      // Re-fetch for full server-state accuracy
-      await fetchRequests();
-    } catch (err) {
-      setError(err?.response?.data?.message || 'Failed to create blood request.');
-      throw err; // re-throw so RequestForm knows the submission failed
-    } finally {
-      setCreating(false);
-    }
-  };
-
   return (
     <BaseLayout>
       <div className="space-y-6">
@@ -59,7 +38,7 @@ export default function BloodRequests() {
           <p className="mt-1 text-slate-600">Create and manage blood requests for {selectedCity}.</p>
         </div>
 
-        <RequestForm onSubmit={createRequest} loading={creating} city={selectedCity} />
+        <RequestForm defaultCity={selectedCity} onSuccess={fetchRequests} />
 
         {error ? <div className="rounded-2xl bg-rose-50 text-rose-700 shadow-md p-4">{error}</div> : null}
 
